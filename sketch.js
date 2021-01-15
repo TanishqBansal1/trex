@@ -28,9 +28,9 @@ trexRun=loadAnimation("trex1.png","trex3.png","trex4.png");
 }
 
 function setup(){
-  createCanvas(600,200);
+  createCanvas(windowWidth,windowHeight);
   
-  trex= createSprite(50,150,5,5);
+  trex= createSprite(50,height-50,5,5);
   trex.addAnimation("ash",trexRun);
   trex.scale=0.5;
   
@@ -38,20 +38,20 @@ function setup(){
   trex.setCollider("rectangle",0,0,100,trex.height);
   trex.addAnimation("ghf",trexS);
   
-  ground=createSprite(300,160,600,3);
+  ground=createSprite(width/2,height-40,width,3);
   ground.addImage(groundI);
   
-  ground2=createSprite(50,170,100,5);
+  ground2=createSprite(width/2,height-30,width,5);
   ground2.visible=false;
   
   cloudG=new Group();
   cactusG=new Group();
   
-  go=createSprite(300,100,10,10);
+  go=createSprite(width/2,height/2,10,10);
   go.addImage(goi);
   go.scale=0.5;
   
-  re=createSprite(300,100,10,10);
+  re=createSprite(width/2,height/2,10,10);
   re.addImage(rei);
   re.scale=0.3;
 }
@@ -61,8 +61,8 @@ function draw(){
   
 
   
-  text("Score:"+score, 500 , 20);
-  text("HI:"+hs, 380 , 20);
+  text("Score:"+score, width-100 , 20);
+  text("HI:"+hs, width-220 , 20);
   
   if(score > hs){
     hs=score;
@@ -83,8 +83,8 @@ function draw(){
        ground.x=ground.width/2;
      }
     
-     if(keyDown("space") && trex.y>143 ){
-       trex.velocityY=-10;
+     if(keyDown("space") && trex.y>height-70 ){
+       trex.velocityY=-12;
        jump.play();
      }
     
@@ -142,7 +142,7 @@ function spawnClouds(){
   
   if(frameCount%80===0){
     
-  cloud=createSprite(600,random(15,50),10,10);
+  cloud=createSprite(width,random(15,50),10,10);
   cloud.velocityX=-3;  
   cloud.addImage(cloudI);
   cloud.scale=0.5;
@@ -150,7 +150,7 @@ function spawnClouds(){
   cloud.depth=trex.depth;
   trex.depth=trex.depth+1;
     
-  cloud.lifetime=210;
+  cloud.lifetime=width/2;
   cloudG.add(cloud);
   }
   
@@ -160,10 +160,10 @@ function spawnCactus(){
   
   if(frameCount%100===0){
     
-    ob=createSprite(600,147,10,10);
+    ob=createSprite(width,height-55,10,10);
     ob.velocityX=-(3+(score/300));
     ob.scale=0.5;
-    ob.lifetime=210;
+    ob.lifetime=width/2;
     cactusG.add(ob);
     
     var a=Math.round(random(1,6));
